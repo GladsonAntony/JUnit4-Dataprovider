@@ -3,13 +3,13 @@ package utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -19,7 +19,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @Author Gladson Antony
  * @Date 21-Feb-2017
  */
-public class ExcelUtils {
+public class ExcelUtils 
+{
 	private static XSSFSheet xlsxWorkSheet;
 	private static XSSFWorkbook xlsxWorkBook;
 	private static XSSFCell xlsxCell;
@@ -35,19 +36,26 @@ public class ExcelUtils {
 	/**
 	 * To get the Excel-XLSX File with Path and SheetName
 	 */
-	public static void getExcelFile(String Path, String SheetName) throws Exception {
-		try {
+	public static void getExcelFile(String Path, String SheetName) throws Exception 
+	{
+		try 
+		{
 			File file = new File(Path);
-			if (file.getAbsolutePath().endsWith(".xlsx")) {
+			if (file.getAbsolutePath().endsWith(".xlsx")) 
+			{
 				FileInputStream fis = new FileInputStream(file);
 				xlsxWorkBook = new XSSFWorkbook(fis);
 				xlsxWorkSheet = xlsxWorkBook.getSheet(SheetName);
-			} else if (file.getAbsolutePath().endsWith(".xls")) {
+			} 
+			else if (file.getAbsolutePath().endsWith(".xls")) 
+			{
 				FileInputStream fis = new FileInputStream(file);
 				xlsWorkBook = new HSSFWorkbook(fis);
 				xlsWorkSheet = xlsWorkBook.getSheet(SheetName);
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			throw (e);
 		}
 	}
@@ -55,11 +63,14 @@ public class ExcelUtils {
 	/**
 	 * To Return the Excel-XLSX Values given Path to the File and Sheet Name
 	 */
-	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
+	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception 
+	{
 		Object[][] tabArray = null;
-		try {
+		try 
+		{
 			File file = new File(FilePath);
-			if (file.getAbsolutePath().endsWith(".xlsx")) {
+			if (file.getAbsolutePath().endsWith(".xlsx")) 
+			{
 				FileInputStream ExcelFile = new FileInputStream(file);
 				xlsxWorkBook = new XSSFWorkbook(ExcelFile);
 				xlsxWorkSheet = xlsxWorkBook.getSheet(SheetName);
@@ -71,15 +82,19 @@ public class ExcelUtils {
 				int totalCols = ExcelUtils.xlsxColumnCount();
 				tabArray = new Object[totalRows - 1][totalCols];
 				ci = 0;
-				for (int i = startRow; i < totalRows; i++) {
+				for (int i = startRow; i < totalRows; i++) 
+				{
 					cj = 0;
-					for (int j = startCol; j < totalCols; j++) {
+					for (int j = startCol; j < totalCols; j++) 
+					{
 						tabArray[ci][cj] = getCellData_XLSX(i, j);
 						cj++;
 					}
 					ci++;
 				}
-			} else if (file.getAbsolutePath().endsWith(".xls")) {
+			} 
+			else if (file.getAbsolutePath().endsWith(".xls")) 
+			{
 				FileInputStream ExcelFile = new FileInputStream(file);
 				xlsWorkBook = new HSSFWorkbook(ExcelFile);
 				xlsWorkSheet = xlsWorkBook.getSheet(SheetName);
@@ -91,18 +106,24 @@ public class ExcelUtils {
 				int totalCols = ExcelUtils.xlsColumnCount();
 				tabArray = new Object[totalRows - 1][totalCols];
 				ci = 0;
-				for (int i = startRow; i < totalRows; i++) {
+				for (int i = startRow; i < totalRows; i++) 
+				{
 					cj = 0;
-					for (int j = startCol; j < totalCols; j++) {
+					for (int j = startCol; j < totalCols; j++)
+					{
 						tabArray[ci][cj] = getCellData_XLS(i, j);
 						cj++;
 					}
 					ci++;
 				}
 			}
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
 			throw new Exception("Could not Find the Excel File/Sheet");
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			throw new Exception("Could not Open the Excel File");
 		}
 		return (tabArray);
@@ -111,11 +132,14 @@ public class ExcelUtils {
 	/**
 	 * To Return the Excel-XLSX Values given Path to the File
 	 */
-	public static Object[][] getTableArray(String FilePath) throws Exception {
+	public static Object[][] getTableArray(String FilePath) throws Exception 
+	{
 		Object[][] tabArray = null;
-		try {
+		try 
+		{
 			File file = new File(FilePath);
-			if (file.getAbsolutePath().endsWith(".xlsx")) {
+			if (file.getAbsolutePath().endsWith(".xlsx")) 
+			{
 				FileInputStream ExcelFile = new FileInputStream(file);
 				xlsxWorkBook = new XSSFWorkbook(ExcelFile);
 				xlsxWorkSheet = xlsxWorkBook.getSheetAt(0);
@@ -127,15 +151,19 @@ public class ExcelUtils {
 				int totalCols = ExcelUtils.xlsxColumnCount();
 				tabArray = new Object[totalRows - 1][totalCols];
 				ci = 0;
-				for (int i = startRow; i < totalRows; i++) {
+				for (int i = startRow; i < totalRows; i++) 
+				{
 					cj = 0;
-					for (int j = startCol; j < totalCols; j++) {
+					for (int j = startCol; j < totalCols; j++) 
+					{
 						tabArray[ci][cj] = getCellData_XLSX(i, j);
 						cj++;
 					}
 					ci++;
 				}
-			} else if (file.getAbsolutePath().endsWith(".xls")) {
+			} 
+			else if (file.getAbsolutePath().endsWith(".xls")) 
+			{
 				FileInputStream ExcelFile = new FileInputStream(file);
 				xlsWorkBook = new HSSFWorkbook(ExcelFile);
 				xlsWorkSheet = xlsWorkBook.getSheetAt(0);
@@ -147,18 +175,24 @@ public class ExcelUtils {
 				int totalCols = ExcelUtils.xlsColumnCount();
 				tabArray = new Object[totalRows - 1][totalCols];
 				ci = 0;
-				for (int i = startRow; i < totalRows; i++) {
+				for (int i = startRow; i < totalRows; i++)
+				{
 					cj = 0;
-					for (int j = startCol; j < totalCols; j++) {
+					for (int j = startCol; j < totalCols; j++) 
+					{
 						tabArray[ci][cj] = getCellData_XLS(i, j);
 						cj++;
 					}
 					ci++;
 				}
 			}
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
 			throw new Exception("Could not Find the Excel File/Sheet");
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			throw new Exception("Could not Open the Excel File");
 		}
 		return (tabArray);
@@ -167,22 +201,31 @@ public class ExcelUtils {
 	/**
 	 * To get cell data from Excel-XLSX
 	 */
-	public static Object getCellData_XLSX(int RowNum, int ColNum) throws Exception {
+	public static Object getCellData_XLSX(int RowNum, int ColNum) throws Exception 
+	{
 		Object CellData = null;
-		try {
+		try
+		{
 			xlsxCell = xlsxWorkSheet.getRow(RowNum).getCell(ColNum);
-			if (xlsxCell.getCellType() == Cell.CELL_TYPE_STRING) {
+			if (xlsxCell.getCellType() == Cell.CELL_TYPE_STRING) 
+			{
 				String stringCellData = xlsxCell.getStringCellValue();
 				CellData = stringCellData;
-			} else if (xlsxCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-				CellData = NumberToTextConverter.toText(xlsxCell.getNumericCellValue());
-			} else if (xlsxCell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+			} 
+			else if (xlsxCell.getCellType() == Cell.CELL_TYPE_NUMERIC) 
+			{
+				//CellData = NumberToTextConverter.toText(xlsxCell.getNumericCellValue());
+				CellData =new BigDecimal(xlsxCell.getNumericCellValue()).doubleValue();
+			} 
+			else if (xlsxCell.getCellType() == Cell.CELL_TYPE_BOOLEAN) 
+			{
 				boolean booleanCellData = xlsxCell.getBooleanCellValue();
 				CellData = booleanCellData;
 			}
-
 			return CellData;
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			return "";
 		}
 	}
@@ -190,21 +233,31 @@ public class ExcelUtils {
 	/**
 	 * To get cell data from Excel-XLS
 	 */
-	public static Object getCellData_XLS(int RowNum, int ColNum) throws Exception {
+	public static Object getCellData_XLS(int RowNum, int ColNum) throws Exception
+	{
 		Object CellData = null;
-		try {
+		try 
+		{
 			xlsCell = xlsWorkSheet.getRow(RowNum).getCell(ColNum);
-			if (xlsCell.getCellType() == Cell.CELL_TYPE_STRING) {
+			if (xlsCell.getCellType() == Cell.CELL_TYPE_STRING) 
+			{
 				String stringCellData = xlsCell.getStringCellValue();
 				CellData = stringCellData;
-			} else if (xlsCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-				CellData = NumberToTextConverter.toText(xlsCell.getNumericCellValue());
-			} else if (xlsCell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+			} 
+			else if (xlsCell.getCellType() == Cell.CELL_TYPE_NUMERIC) 
+			{
+				//CellData = NumberToTextConverter.toText(xlsCell.getNumericCellValue());
+				CellData =new BigDecimal(xlsCell.getNumericCellValue()).doubleValue();
+			} 
+			else if (xlsCell.getCellType() == Cell.CELL_TYPE_BOOLEAN) 
+			{
 				boolean booleanCellData = xlsCell.getBooleanCellValue();
 				CellData = booleanCellData;
 			}
 			return CellData;
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			return "";
 		}
 	}
@@ -212,7 +265,8 @@ public class ExcelUtils {
 	/**
 	 * To get Excel-XLSX Row Count
 	 */
-	public static int xlsxRowCount() {
+	public static int xlsxRowCount() 
+	{
 		int rowNum = xlsxWorkSheet.getLastRowNum() + 1;
 		return rowNum;
 	}
@@ -220,7 +274,8 @@ public class ExcelUtils {
 	/**
 	 * To get Excel-XLS Row Count
 	 */
-	public static int xlsRowCount() {
+	public static int xlsRowCount() 
+	{
 		int rowNum = xlsWorkSheet.getLastRowNum() + 1;
 		return rowNum;
 	}
@@ -228,7 +283,8 @@ public class ExcelUtils {
 	/**
 	 * To get Excel-XLSX Column Count
 	 */
-	public static int xlsxColumnCount() {
+	public static int xlsxColumnCount() 
+	{
 		int rowNum = xlsxWorkSheet.getRow(0).getLastCellNum();
 		return rowNum;
 	}
@@ -236,7 +292,8 @@ public class ExcelUtils {
 	/**
 	 * To get Excel-XLS Column Count
 	 */
-	public static int xlsColumnCount() {
+	public static int xlsColumnCount() 
+	{
 		int rowNum = xlsWorkSheet.getRow(0).getLastCellNum();
 		return rowNum;
 	}

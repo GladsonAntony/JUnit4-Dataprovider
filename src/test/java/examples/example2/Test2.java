@@ -1,4 +1,4 @@
-package example;
+package examples.example2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,7 @@ import java.io.File;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.model.FrameworkMethod;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
@@ -17,19 +18,19 @@ import utils.ExcelUtils;
 public class Test2 
 {
 	@DataProvider
-	public static Object[][] dataProviderAdd() throws Exception
+	public static Object[][] excelSheetNameAsMethodName(FrameworkMethod method) throws Exception
 	{
-		File file = new File("src/test/resources/Excel Files/testAdd.xlsx");
+		File file = new File("./src/test/resources/Excel Files/"+method.getName()+".xlsx");
 		System.out.println("Opening Excel File:" +file.getAbsolutePath());
 		Object testObjArray[][] = ExcelUtils.getTableArray(file.getAbsolutePath());
 		return testObjArray;
 	}
 	
 	@Test
-	@UseDataProvider("dataProviderAdd")
-	public void testAdd(String a, String b, String expected) {
-		int result = Integer.parseInt(a) + Integer.parseInt(b);
-		assertEquals(Integer.parseInt(expected), result);
+	@UseDataProvider("excelSheetNameAsMethodName")
+	public void testAdd(Double a, Double b, Double expected) 
+	{
+		Double result = a + b;
+		assertEquals(expected, result);
 	}
-
 }
