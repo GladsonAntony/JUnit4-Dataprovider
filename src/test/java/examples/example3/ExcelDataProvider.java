@@ -23,7 +23,7 @@ public class ExcelDataProvider
 	public static Object[][] excelSheetNameAsMethodName(FrameworkMethod method) throws Exception
 	{
 		File file = new File("./src/test/resources/Excel Files/"+method.getName()+".xlsx");
-		System.out.println("Opening Excel File:" +file.getAbsolutePath());
+		System.out.println("\nReading Excel File\n" +file.getAbsolutePath());
 		Object testObjArray[][] = ExcelUtils.getTableArray(file.getAbsolutePath());
 		return testObjArray;
 	}
@@ -33,7 +33,8 @@ public class ExcelDataProvider
 	{
 		File file = new File("./src/test/resources/Excel Files/TestData.xlsx");
 		String SheetName = method.getName();
-		System.out.println(SheetName);
+		System.out.println("\nReading Excel File\n" +file.getAbsolutePath());
+		System.out.println("Reading Sheet Name- > " +SheetName);
 		Object testObjArray[][] = ExcelUtils.getTableArray(file.getAbsolutePath(), SheetName);
 		return testObjArray;
 	}
