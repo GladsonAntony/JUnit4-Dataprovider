@@ -11,7 +11,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<apachepoi.version>3.13</apachepoi.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<junit.dataprovider.version>1.13.1</junit.dataprovider.version>
 		<aspectj.version>1.8.13</aspectj.version>
 		<slf4j.version>1.7.24</slf4j.version>
